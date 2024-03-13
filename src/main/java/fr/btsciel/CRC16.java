@@ -1,5 +1,7 @@
 package fr.btsciel;
 
+import java.util.Scanner;
+
 public class CRC16 {
 
 
@@ -7,7 +9,11 @@ public class CRC16 {
     public static int initialValue = 0xffff;
 
     public static void main(String[] args) {
-        String tramHex ="0103";
+        Scanner scanner =new Scanner(System.in);
+        System.out.println("Veuillez saisir la trame en Hexadecimal: ");
+        String tramHex= scanner.next();
+        scanner.close();
+
         byte[] octets = hexStringEnByteArray(tramHex);
 
         int crcValue =calculCrc16(octets,initialValue,stdPoly);
@@ -46,5 +52,11 @@ public class CRC16 {
         }
         return data;
     }
-
+    static byte[] formatage(String trame){
+        if ((trame.length() % 2) == 0){
+            return hexStringEnByteArray(trame);
+        }else {
+            return hexStringEnByteArray(trame + "0");
+        }
+    }
 }
