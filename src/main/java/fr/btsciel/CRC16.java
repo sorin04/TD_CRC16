@@ -18,7 +18,7 @@ public class CRC16 {
 
         int crcValue =calculCrc16(octets,initialValue,stdPoly);
 
-        System.out.println("Le CRC16 de la trame   "+ tramHex+ " est: "+Integer.toHexString(crcValue).toUpperCase());
+        System.out.println("Le CRC16 de la trame "+ tramHex+ " est: " + crcValue + " " + "0x" + Integer.toHexString(crcValue).toUpperCase());
 
 
 
@@ -27,10 +27,10 @@ public class CRC16 {
     }
      static int calculCrc16(byte[]octects, int valeurInitiale, int polynome){
          int crc = valeurInitiale;
-         for (byte octet : octects) {
-             crc ^= (octet & 0xFF);
+         for (int p=0;p<octects.length;p++) {
+             crc ^= (octects [p] & 0xFF);
              for (int i = 0; i < 8; i++) {
-                 if ((crc & 0x0001) != 0) {
+                 if ((crc & 1) != 0) {
                      crc = (crc >> 1) ^ polynome;
                  } else {
                      crc >>= 1;
